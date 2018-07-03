@@ -1,5 +1,6 @@
 require("dotenv").config();
 
+//Global variables
 var keys = require("./keys.js");
 var fs = require("fs");
 var Twitter = require('twitter');
@@ -8,10 +9,7 @@ var command = process.argv[2];
 var nodeArgs = process.argv;
 var request = require("request");
 
-
-//Builds a song title 
-
-
+//Switch statment for var command...
 switch (command) {
     case "my-tweets":
         tweets();
@@ -27,6 +25,7 @@ switch (command) {
         break;
 }
 
+//Function for Twitter NPM
 function tweets() {
     var client = new Twitter(keys.twitter);
     var params = { screen_name: 'hildarrgo', count: 20 };
@@ -41,6 +40,7 @@ function tweets() {
     });
 }
 
+//Function for Spotify NPM
 function spotify() {
     var spotify = new Spotify(keys.spotify);
     var song = "";
@@ -65,6 +65,7 @@ function spotify() {
     });
 }
 
+//Function for OMDB NPM
 function movie() {
     var movie = "";
     for (var i = 3; i < nodeArgs.length; i++) {
@@ -91,6 +92,7 @@ function movie() {
     });
 }
 
+//Function for do-what-it-says
 function doWhatItSays() {
     fs.readFile('random.txt', "utf8", function (error, data) {
         var dataResult = data.split(',');

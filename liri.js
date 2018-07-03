@@ -41,7 +41,7 @@ function tweets() {
 }
 
 //Function for Spotify NPM
-function spotify() {
+function spotify(song) {
     var spotify = new Spotify(keys.spotify);
     var song = "";
     for (var i = 3; i < nodeArgs.length; i++) {
@@ -66,7 +66,7 @@ function spotify() {
 }
 
 //Function for OMDB NPM
-function movie() {
+function movie(movie) {
     var movie = "";
     for (var i = 3; i < nodeArgs.length; i++) {
         movie = movie + " " + nodeArgs[i];
@@ -98,10 +98,16 @@ function doWhatItSays() {
         var dataResult = data.split(',');
         console.log(dataResult);
         console.log(dataResult[1]);
-        if (dataResult[0] === "spotify-this-song") {
-            dataResult[0] = process.argv[2];
-            dataResult[1] = process.argv[3];
-            spotify();  
+        switch (dataResult[0]) {
+            case "spotify-this-song":
+                spotify(dataResult[1]);
+                break;
+            case "my-tweets":
+                tweets();
+                break;
+            case "movie-this":
+                movie(dataResult[1]);
+                break;
         }
     });
 }

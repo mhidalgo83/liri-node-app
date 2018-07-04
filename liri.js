@@ -43,9 +43,11 @@ function tweets() {
 //Function for Spotify NPM
 function spotify(song) {
     var spotify = new Spotify(keys.spotify);
-    var song = "";
-    for (var i = 3; i < nodeArgs.length; i++) {
-        song = song + " " + nodeArgs[i];
+    if (!song) {
+        var song = "";
+        for (var i = 3; i < nodeArgs.length; i++) {
+            song = song + " " + nodeArgs[i];
+        }
     }
     spotify.search({ type: 'track', query: song }, function (error, data) {
         if (!error) {
@@ -67,9 +69,11 @@ function spotify(song) {
 
 //Function for OMDB NPM
 function movie(movie) {
-    var movie = "";
-    for (var i = 3; i < nodeArgs.length; i++) {
-        movie = movie + " " + nodeArgs[i];
+    if (!movie) {
+        var movie = "";
+        for (var i = 3; i < nodeArgs.length; i++) {
+            movie = movie + " " + nodeArgs[i];
+        }
     }
     var omdbURL = "http://www.omdbapi.com/?t=" + movie + "=&plot=short&apikey=124ed23e";
     request(omdbURL, function (error, response, body) {
